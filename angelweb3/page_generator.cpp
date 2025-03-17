@@ -49,7 +49,7 @@ namespace aw3 {
 			file.seekg(0, ios_base::seekdir::beg);
 			file.read(fileText.data(), fileSize);
 			tinymarkdown::parser parser;
-			cout << "Generating " << path.string() << endl;
+			cout << "Generating " << destPath.lexically_relative(mSitePath).string() << endl;
 			ofstream ofile(destPath.string());
 			string html{parser.parse(fileText)};
 			ofile.write(html.data(), html.size());
@@ -57,7 +57,7 @@ namespace aw3 {
 				   && !path.filename().string().starts_with(".")) {
 			filesystem::path destPath{filesystem::path{mSitePath / filesystem::path{"_site"} / path.lexically_relative(mSitePath)}};
 			filesystem::copy(path, destPath);
-			cout << "Copying " << path.string() << " to " << destPath.string() << endl;
+			cout << "Copying " << path.lexically_relative(mSitePath).string() << " to " << destPath.lexically_relative(mSitePath).string() << endl;
 		}
 	}
 	
