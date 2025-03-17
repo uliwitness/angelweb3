@@ -11,6 +11,8 @@ namespace aw3 {
 	public:
 		page_generator(const filesystem::path &sitePath) : mSitePath(sitePath) {}
 		
+		void create_directory_hierarchy(const filesystem::path &path);
+		void generate_pages(const filesystem::path &path);
 		void generate_page(const filesystem::path &path);
 		
 	protected:

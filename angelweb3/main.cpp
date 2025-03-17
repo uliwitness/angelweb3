@@ -29,14 +29,9 @@ int main(int argc, const char * argv[]) {
 		aw3::page_generator pageGenerator(sitePath);
 		filesystem::create_directory(sitePath / "_site");
 		
-		filesystem::directory_iterator start(sitePath);
-		filesystem::directory_iterator end;
-		vector<string> paths;
-		
-		for (auto curr = start; curr != end; ++curr) {
-			pageGenerator.generate_page(curr->path());
-		}
-		
+		pageGenerator.create_directory_hierarchy(sitePath);
+		pageGenerator.generate_pages(sitePath);
+
 		return 0;
 	} catch(const exception& err) {
 		cerr << "error: " << err.what() << endl;
