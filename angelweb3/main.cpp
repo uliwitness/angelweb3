@@ -1,9 +1,12 @@
+#include "parse_arguments.hpp"
+#include "page_generator.hpp"
 #include <iostream>
 #include <span>
 #include <map>
 #include <optional>
-#include "parse_arguments.hpp"
 #include <unistd.h>
+#include <filesystem>
+
 
 using namespace std;
 
@@ -13,18 +16,25 @@ int main(int argc, const char * argv[]) {
 		map<string, string> settings;
 		
 		aw3::parse_arguments(args, settings);
-		if (0 != chdir(aw3::argument("0", settings).c_str())) {
-			throw runtime_error("Can't find specified directory.");
+		string working_dir{aw3::argument("0", settings)};
+		if (0 != chdir(working_dir.c_str())) {
+			throw runtime_error("Can't find directory \"" + working_dir + "\".");
 		}
 		
-		FILE * f = fopen("testfile.txt", "w");
-		fclose(f);
+		string sp(2048, '\0');
+		getcwd(sp.data(), sp.size());
+		sp.resize(strlen(sp.c_str()));
+		filesystem::path sitePath(sp);
+
+		aw3::page_generator pageGenerator(sitePath);
 		
-		string cwd(1024, '\0');
-		const char* cCwd = getcwd(cwd.data(), cwd.size());
-		cwd.resize(strlen(cCwd));
+		std::filesystem::directory_iterator start(sitePath);
+		std::filesystem::directory_iterator end;
+		std::vector<string> paths;
 		
-		cout << cwd << endl;
+		for (auto curr = start; curr != end; ++curr) {
+			pageGenerator.generate_page(curr->path());
+		}
 		
 		return 0;
 	} catch(const exception& err) {
