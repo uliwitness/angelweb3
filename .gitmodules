@@ -1,3 +1,3 @@
 [submodule "tinymarkdown"]
 	path = tinymarkdown
-	url = https://uliwitness@github.com/uliwitness/tinymarkdown.git
+	url = git@github.com:uliwitness/tinymarkdown.git
