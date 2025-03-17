@@ -27,10 +27,11 @@ int main(int argc, const char * argv[]) {
 		filesystem::path sitePath(sp);
 
 		aw3::page_generator pageGenerator(sitePath);
+		filesystem::create_directory(sitePath / "_site");
 		
-		std::filesystem::directory_iterator start(sitePath);
-		std::filesystem::directory_iterator end;
-		std::vector<string> paths;
+		filesystem::directory_iterator start(sitePath);
+		filesystem::directory_iterator end;
+		vector<string> paths;
 		
 		for (auto curr = start; curr != end; ++curr) {
 			pageGenerator.generate_page(curr->path());

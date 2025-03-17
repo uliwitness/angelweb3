@@ -20,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		55754CF02D86E6A500D21445 /* angelweb3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = angelweb3; sourceTree = BUILT_PRODUCTS_DIR; };
+		55754D1A2D88D66900D21445 /* tinymarkdown.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tinymarkdown.hpp; path = tinymarkdown/tinymarkdown/tinymarkdown.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -45,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				55754CF22D86E6A500D21445 /* angelweb3 */,
+				55754D1A2D88D66900D21445 /* tinymarkdown.hpp */,
 				55754CF12D86E6A500D21445 /* Products */,
 			);
 			sourceTree = "<group>";
